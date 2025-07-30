@@ -91,7 +91,7 @@ def chat():
         session["history"] = []
         session["step"] = 1
         session["name"] = ""
-        session["reason"] = ""
+        reason = ""
         bot_msg = "Hi! I am your emotional support guide, what is your name?"
         session["history"].append(("bot", bot_msg))
 
@@ -132,7 +132,7 @@ def chat():
 
         elif session["step"] == 3 and message_input:
             session["history"].append(("user", message_input))
-            reason = "user", message_input.lower()
+            reason = message_input.lower()
             reason = process_reason(reason)
 
 
