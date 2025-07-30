@@ -132,12 +132,12 @@ def chat():
 
         elif session["step"] == 3 and message_input:
             session["history"].append(("user", message_input))
-            session["reason"] = "user", message_input.lower()
-            session["reason"] = process_reason(session["reason"])
+            reason = "user", message_input.lower()
+            reason = process_reason(reason)
 
 
             if mood == "happy":
-                bot_msg = "Wow! That's amazing! I am so happy to hear that ", session["reason"]
+                bot_msg = "Wow! That's amazing! I am so happy to hear that ", reason
             elif mood == "sad":
                 bot_msg = "Ah, I can imagine how that must make you feel"
             elif mood == "angry":
