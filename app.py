@@ -69,6 +69,19 @@ def mood_matching(user_input):
         if best_match_index < length:
             return list(processed_moods.keys())[i]
 
+def process_reason(reason):
+    tokens = reason.split(" ")
+    for token in tokens:
+        if token in ["i", "we"]:
+            token = "you"
+        elif token == "my":
+            token = "your"
+        elif token == "i'm":
+            token == "you're"
+        elif token == "am":
+            token == "are"
+    return " ".join(tokens)
+
 # Web route
 @app.route("/", methods=["GET", "POST"])
 def chat():
@@ -78,6 +91,7 @@ def chat():
         session["history"] = []
         session["step"] = 1
         session["name"] = ""
+        session["reason"] = ""
         bot_msg = "Hi! I am your emotional support guide, what is your name?"
         session["history"].append(("bot", bot_msg))
 
@@ -118,8 +132,12 @@ def chat():
 
         elif session["step"] == 3 and message_input:
             session["history"].append(("user", message_input))
+            session["reason"].append(("user", message_input.lower()))
+            session["reason"] = process_reason(session["reason"])
+
+
             if mood == "happy":
-                bot_msg = "Wow! That's amazing!"
+                bot_msg = "Wow! That's amazing! I am so happy to hear that ", session["reason"]
             elif mood == "sad":
                 bot_msg = "Ah, I can imagine how that must make you feel"
             elif mood == "angry":
