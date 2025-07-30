@@ -70,17 +70,23 @@ def mood_matching(user_input):
             return list(processed_moods.keys())[i]
 
 def process_reason(reason):
-    tokens = reason.split(" ")
+    tokens = reason.lower().split()
+    converted_tokens = []
     for token in tokens:
-        if token in ["i", "we"]:
-            token = "you"
+        if token == "i":
+            converted_tokens.append("you")
+        elif token == "we":
+            converted_tokens.append("you")
         elif token == "my":
-            token = "your"
+            converted_tokens.append("your")
         elif token == "i'm":
-            token == "you're"
+            converted_tokens.append("you're")
         elif token == "am":
-            token == "are"
-    return " ".join(tokens)
+            converted_tokens.append("are")
+        else:
+            converted_tokens.append(token)
+    return " ".join(converted_tokens)
+
 
 # Web route
 @app.route("/", methods=["GET", "POST"])
@@ -137,7 +143,7 @@ def chat():
 
 
             if mood == "happy":
-                bot_msg = "Wow! That's amazing! I am so happy to hear that ", reason
+                bot_msg = f"Wow! That's amazing! I am so happy to hear that {reason}"
             elif mood == "sad":
                 bot_msg = "Ah, I can imagine how that must make you feel"
             elif mood == "angry":
