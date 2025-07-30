@@ -132,7 +132,7 @@ def chat():
 
         elif session["step"] == 3 and message_input:
             session["history"].append(("user", message_input))
-            session["reason"].append(("user", message_input.lower()))
+            session["reason"] = "user", message_input.lower()
             session["reason"] = process_reason(session["reason"])
 
 
