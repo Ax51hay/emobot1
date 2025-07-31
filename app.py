@@ -101,7 +101,7 @@ def chat():
         session["history"] = []
         session["step"] = 1
         session["name"] = ""
-        bot_msg = "Hi! I am your emotional support guide, what is your name?"
+        bot_msg = "Hi! I am your emotional support chatbot - what is your name?"
         session["history"].append(("bot", bot_msg))
 
 
@@ -119,25 +119,29 @@ def chat():
         elif session["step"] == 2 and message_input:
             session["history"].append(("user", message_input))
             mood = mood_matching(message_input)
-            if mood == "happy":
-                bot_msg = f"I'm so glad to hear you're feeling happy today, {session['name'].capitalize()}!"
-            elif mood == "sad":
-                bot_msg = f"I'm sorry to hear you're feeling sad, {session['name'].capitalize()}. Maybe I can help."
-            elif mood == "angry":
-                bot_msg = f"It's okay to feel angry, {session['name'].capitalize()}. Let's talk about it."
+            if mood != None:
+                if mood == "happy":
+                    bot_msg = f"I'm so glad to hear you're feeling happy today, {session['name'].capitalize()}!"
+                elif mood == "sad":
+                    bot_msg = f"I'm sorry to hear you're feeling sad, {session['name'].capitalize()}. Maybe I can help."
+                elif mood == "angry":
+                    bot_msg = f"It's okay to feel angry, {session['name'].capitalize()}. Let's talk about it."
+                else:
+                    bot_msg = "I'm not sure I understand — could you try expressing how you feel again?"
+                session["history"].append(("bot", bot_msg))
+
+                if mood == "happy":
+                    bot_msg = "Would you like to share what's brought on your good mood?"
+                elif mood == "sad":
+                    bot_msg = "Sad days happen to all of us, would you like to share what has been on your mind lately?"
+                elif mood == "angry":
+                    bot_msg = "If you don't mind sharing, what's been triggering these feelings today?"
+
+                session["history"].append(("bot", bot_msg))
+                session["step"] = 3
             else:
-                bot_msg = "I'm not sure I understand — could you try expressing how you feel again?"
-            session["history"].append(("bot", bot_msg))
-
-            if mood == "happy":
-                bot_msg = "Would you like to share what's brought on your good mood?"
-            elif mood == "sad":
-                bot_msg = "Sad days happen to all of us, would you like to share what has been on your mind lately?"
-            elif mood == "angry":
-                bot_msg = "If you don't mind sharing, what's been triggering these feelings today?"
-
-            session["history"].append(("bot", bot_msg))
-            session["step"] = 3
+                bot_msg = f"I'm not quite sure I got how you're feeling, would you be able to describe your emotions to me in a different way?"
+                session["history"].append(("bot", bot_msg))
 
         elif session["step"] == 3 and message_input:
             session["history"].append(("user", message_input))
