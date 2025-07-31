@@ -5,6 +5,7 @@ from nltk.stem.snowball import PorterStemmer
 import numpy as np
 import re
 import warnings
+import string
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key'  # Needed for session support
@@ -72,6 +73,7 @@ def mood_matching(user_input):
             return list(processed_moods.keys())[i]
 
 def process_input(reason):
+    reason = reason.strip().rstrip(string.punctuation)
     tokens = reason.lower().split()
     converted_tokens = []
     for token in tokens:
