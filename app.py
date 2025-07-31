@@ -179,9 +179,9 @@ def chat():
             if mood == "happy":
                 bot_msg = f"Well I think that you have a great day ahead of you {session['name'].capitalize()}, feel free to update me about what you get up to tomorrow!"
             elif mood == "sad":
-                bot_msg = f"I hope that your day improves, {session['name'].capitalize()}. Please let me know how the rest of it goes tomorrow!"
+                bot_msg = f"I really hope that your day improves, {session['name'].capitalize()}. Please let me know how the rest of it goes tomorrow!"
             elif mood == "angry":
-                bot_msg = f"I hope that your mood lightens when {plan}. I look forward to speaking with you in tomorrow's check in!"
+                bot_msg = f"I really hope that your mood lightens when {plan}, {session['name'].capitalize()}. I look forward to hearing about it in tomorrow's check in!"
 
             session["history"].append(("bot", bot_msg))
             session["step"] = 5
