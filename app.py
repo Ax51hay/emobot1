@@ -69,7 +69,7 @@ def mood_matching(user_input):
         if best_match_index < length:
             return list(processed_moods.keys())[i]
 
-def process_reason(reason):
+def process_input(reason):
     tokens = reason.lower().split()
     converted_tokens = []
     for token in tokens:
@@ -98,6 +98,7 @@ def chat():
         session["step"] = 1
         session["name"] = ""
         reason = ""
+        plans = ""
         bot_msg = "Hi! I am your emotional support guide, what is your name?"
         session["history"].append(("bot", bot_msg))
 
@@ -139,11 +140,11 @@ def chat():
         elif session["step"] == 3 and message_input:
             session["history"].append(("user", message_input))
             reason = message_input.lower()
-            reason = process_reason(reason)
+            reason = process_input(reason)
 
 
             if mood == "happy":
-                bot_msg = f"Wow! That's amazing! I am so happy to hear that {reason}"
+                bot_msg = "Wow! That's amazing!"
             elif mood == "sad":
                 bot_msg = "Ah, I can imagine how that must make you feel"
             elif mood == "angry":
@@ -162,13 +163,23 @@ def chat():
             session["step"] = 4
 
         elif session["step"] == 4 and message_input:
+            plan = message_input.lower()
+            plan = process_input(plan)
             session["history"].append(("user", message_input))
             if mood == "happy":
-                bot_msg = "Wow! That's amazing!"
+                bot_msg = f"Sounds great! That combined with how {reason} is sure to keep you in a perfect mood!"
             elif mood == "sad":
-                bot_msg = "Ah, I can imagine how that must make you feel"
+                bot_msg = f"Sometimes when you are upset, talking through it with someone takes the burden off of you. If you feel comfortable disclosing how {reason}, then I recommend speaking to a friend about your worries."
             elif mood == "angry":
-                bot_msg = "That sounds incredibly frustrating, I can see why it's caused your mood to worsen."
+                bot_msg = f"Everyone feels anger and frustration sometimes, but it shows that we care about something."
+            session["history"].append(("bot", bot_msg))
+
+            if mood == "happy":
+                bot_msg = f"Well I think that you have a great day ahead of you {session['name'].capitalize()}, feel free to update me about what you get up to tomorrow!"
+            elif mood == "sad":
+                bot_msg = f"I hope that your day improves, {session['name'].capitalize()}. Please let me know how the rest of it goes tomorrow!"
+            elif mood == "angry":
+                bot_msg = f"I hope that your mood lightens when {plan}. I look forward to speaking with you in tomorrow's check in!"
 
             session["history"].append(("bot", bot_msg))
             session["step"] = 5
