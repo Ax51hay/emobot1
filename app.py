@@ -10,6 +10,8 @@ app = Flask(__name__)
 app.secret_key = 'your-secret-key'  # Needed for session support
 warnings.filterwarnings("ignore", category=RuntimeWarning)
 mood = None
+reason = ""
+plans = ""
 
 # Mood dataset
 moods = {
@@ -91,14 +93,12 @@ def process_input(reason):
 # Web route
 @app.route("/", methods=["GET", "POST"])
 def chat():
-    global mood
+    global mood, reason, plans
     if request.method == "GET":
         session.clear()
         session["history"] = []
         session["step"] = 1
         session["name"] = ""
-        reason = ""
-        plans = ""
         bot_msg = "Hi! I am your emotional support guide, what is your name?"
         session["history"].append(("bot", bot_msg))
 
