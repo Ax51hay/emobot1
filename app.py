@@ -101,7 +101,7 @@ def chat():
         session["history"] = []
         session["step"] = 1
         session["name"] = ""
-        bot_msg = "Hi! I am your emotional support chatbot - what is your name?"
+        bot_msg = "Hi! I am EmoBot, your emotional support chatbot - what is your name?"
         session["history"].append(("bot", bot_msg))
 
 
