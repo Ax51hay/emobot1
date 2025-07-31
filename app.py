@@ -17,40 +17,28 @@ plans = ""
 # Mood dataset
 moods = {
     "happy": [
-    "I am feeling good today", "I am well thank you", "I'm good", "I'm feeling happy",
-    "I'm so happy", "I'm so excited", "Today I am feeling happy", "I'm feeling joyful",
-    "Things are going really well", "I'm feeling optimistic today", "I'm in a great mood!",
-    "Life is good right now", "I'm quite cheerful", "I feel content and peaceful",
-    "I'm full of energy today", "I'm feeling positive", "Everything feels right today",
-    "I'm on top of the world", "Nothing can ruin my day", "I'm so grateful for today",
-    "I'm smiling for no reason", "I'm feeling lucky", "Everything is falling into place",
-    "Today feels special", "I feel refreshed and inspired", "I'm excited for what's next",
-    "I'm buzzing with energy", "I feel like dancing", "I'm laughing a lot today",
-    "This is one of the best days I've had in a while"
+        "I am feeling good today", "I am well thank you", "I'm good",
+        "I'm feeling happy", "I'm so happy", "I'm so excited", "Today I am feeling happy",
+        "I'm feeling joyful", "Things are going really well", "I'm feeling optimistic today",
+        "I'm in a great mood!", "Life is good right now", "I'm quite cheerful",
+        "I feel content and peaceful", "I'm full of energy today", "I'm feeling positive",
+        "Everything feels right today"
     ],
-
     "sad": [
-    "I'm feeling down", "Today hasn't been great", "I'm not doing so well", "I'm a bit sad",
-    "I feel really low today", "I've been feeling blue", "I'm upset", "I'm having a hard day",
-    "I just feel empty", "Things have been rough", "I feel like crying", "I'm emotionally drained",
-    "I feel hopeless", "I'm feeling a little lost", "My mood is really low", "I'm feeling lonely",
-    "I'm not in the best headspace right now", "I'm feeling quite sad today", "I'm feeling terrible",
-    "I don't have any motivation", "I just want to be alone", "I'm overwhelmed by everything",
-    "I'm struggling to cope", "Nothing feels right", "I'm mentally exhausted",
-    "I can't seem to shake this feeling", "I'm feeling heartbroken", "Today just feels heavy",
-    "I feel like giving up", "I'm not okay", "I'm barely holding it together"
+        "I'm feeling down", "Today hasn't been great", "I'm not doing so well",
+        "I'm a bit sad", "I feel really low today", "I've been feeling blue", "I'm upset",
+        "I'm having a hard day", "I just feel empty", "Things have been rough",
+        "I feel like crying", "I'm emotionally drained", "I feel hopeless",
+        "I'm feeling a little lost", "My mood is really low", "I'm feeling lonely",
+        "I'm not in the best headspace right now", "I'm feeling quite sad today"
     ],
-
     "angry": [
-    "I'm really annoyed", "I'm frustrated today", "Things are making me angry", "I'm feeling irritated",
-    "I'm mad right now", "I'm seriously pissed off", "I can't deal with this!", "Everything is getting on my nerves",
-    "I'm so fed up", "I'm losing my patience", "People keep pushing my buttons", "I'm just in a bad mood",
-    "I'm raging inside", "I feel so tense and angry", "This day has been infuriating", "I'm seething right now",
-    "My temper is running thin", "Why is everything so difficult?", "I'm boiling over with anger",
-    "I'm furious right now", "I feel like screaming", "I'm not in the mood for anything",
-    "Everyone's testing me today", "I can't take it anymore", "I'm about to explode",
-    "I'm feeling really short-tempered", "I'm at my limit", "I'm furious and exhausted",
-    "I want to lash out", "I'm done being nice today"
+        "I'm really annoyed", "I'm frustrated today", "Things are making me angry",
+        "I'm feeling irritated", "I'm mad right now", "I'm seriously pissed off",
+        "I can't deal with this!", "Everything is getting on my nerves", "I'm so fed up",
+        "I'm losing my patience", "People keep pushing my buttons", "I'm just in a bad mood",
+        "I'm raging inside", "I feel so tense and angry", "This day has been infuriating",
+        "I'm seething right now", "My temper is running thin"
     ]
 }
 
@@ -138,6 +126,8 @@ def chat():
                     bot_msg = f"I'm sorry to hear you're feeling sad, {session['name'].capitalize()}. Maybe I can help."
                 elif mood == "angry":
                     bot_msg = f"It's okay to feel angry, {session['name'].capitalize()}. Let's talk about it."
+                else:
+                    bot_msg = "I'm not sure I understand — could you try expressing how you feel again?"
                 session["history"].append(("bot", bot_msg))
 
                 if mood == "happy":
